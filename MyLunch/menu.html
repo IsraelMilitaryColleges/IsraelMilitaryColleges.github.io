@@ -82,11 +82,14 @@
                         Authorization: `Bearer ${ACCESS_TOKEN}`,
                     },
                     body: JSON.stringify({
+                        insertDataOption: 'INSERT_ROWS',
+                        valueInputOption: 'USER_ENTERED',
                         values: [
                             [
                                 "etay"
                             ]
                         ]
+                        
                     //     requests: [{
                     //         repeatCell: {
                     //             range: {
