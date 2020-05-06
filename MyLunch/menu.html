@@ -64,18 +64,53 @@
                     var dish = $('input[name="dishRadioInput"]:checked').val();
                     alert(dish);
 
-                    var spreadsheetId = "103qJwyvJV4Mhnx7agcU74fJES8S0W9nLfvwU8FrvPv8";
-                    var postUrl = "https://sheets.googleapis.com/v4/spreadsheets/" + spreadsheetId + "/values/A:I:append";
-
-                    alert(postUrl);
-
-                    $.post(postUrl, function(data) {
-                      alert(data);
-                    });
-
-                    // POST
+                    updateSheetValues();
                 });
             });
+
+
+            const SHEET_ID = '1uaFDiVmdvuIQtiElvVmlf5WdonQqUTIi5J1o_NEoOK4';
+            const ACCESS_TOKEN = 'ya29.a0Ae4lvC02Ln8p6z0GFgRIsIGmhgFMWK0GPdFEAigcPOer0d6DktmeH_aP8T-jLWvpij71LGEG1NaF9a_Oi6SBy6L0VKeh2VZNR9kgRfHzBHFmTp5gaBwMzWG9nfCtOUlkHW1h-A00FhIM1gLacbkcQXlJJz_Y6fFtCVQ';
+
+            updateSheetValues = () => {
+                fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}:batchUpdate`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        //update this token with yours. 
+                        Authorization: `Bearer ${ACCESS_TOKEN}`,
+                    },
+                    body: JSON.stringify({
+                        requests: [{
+                            repeatCell: {
+                                range: {
+                                    startColumnIndex: 0,
+                                    endColumnIndex: 1,
+                                    startRowIndex: 0,
+                                    endRowIndex: 1,
+                                    sheetId: 0
+                                },
+                                cell: {
+                                    userEnteredValue: {
+                                        "numberValue": 10
+                                    },
+                                },
+                                fields: "*"
+                            }
+                        }]
+
+                    })
+                })
+            }
+            // render() {
+            //     return ( 
+            //     <div className = "App" >
+            //         hello world 
+            //         <button onClick={this.updateSheetValues}>Update A1</button>
+            //     </div>
+            //     );
+
+            // }
         </script>
     </body>
 </html>
