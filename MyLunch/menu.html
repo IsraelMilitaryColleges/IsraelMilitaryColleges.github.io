@@ -73,7 +73,8 @@
             const ACCESS_TOKEN = 'ya29.a0Ae4lvC02Ln8p6z0GFgRIsIGmhgFMWK0GPdFEAigcPOer0d6DktmeH_aP8T-jLWvpij71LGEG1NaF9a_Oi6SBy6L0VKeh2VZNR9kgRfHzBHFmTp5gaBwMzWG9nfCtOUlkHW1h-A00FhIM1gLacbkcQXlJJz_Y6fFtCVQ';
 
             updateSheetValues = () => {
-                fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}:batchUpdate`, {
+                //fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}:batchUpdate`, {
+                fetch(`https://sheets.googleapis.com/v4/spreadsheets/${SHEET_ID}/values/A:I:append`, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
@@ -81,25 +82,30 @@
                         Authorization: `Bearer ${ACCESS_TOKEN}`,
                     },
                     body: JSON.stringify({
-                        requests: [{
-                            repeatCell: {
-                                range: {
-                                    startColumnIndex: 0,
-                                    endColumnIndex: 1,
-                                    startRowIndex: 0,
-                                    endRowIndex: 1,
-                                    sheetId: 0
-                                },
-                                cell: {
-                                    userEnteredValue: {
-                                        "numberValue": 10
-                                    },
-                                },
-                                fields: "*"
-                            }
-                        }]
+                        values: [
+                            [
+                                "etay"
+                            ]
+                        ]
+                    //     requests: [{
+                    //         repeatCell: {
+                    //             range: {
+                    //                 startColumnIndex: 0,
+                    //                 endColumnIndex: 1,
+                    //                 startRowIndex: 0,
+                    //                 endRowIndex: 1,
+                    //                 sheetId: 0
+                    //             },
+                    //             cell: {
+                    //                 userEnteredValue: {
+                    //                     "numberValue": 10
+                    //                 },
+                    //             },
+                    //             fields: "*"
+                    //         }
+                    //     }]
 
-                    })
+                    // })
                 })
             }
             // render() {
